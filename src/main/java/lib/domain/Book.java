@@ -20,6 +20,7 @@ public class Book {
     @ManyToOne
     private Author author;
 
+    @Column(name="publication_year")
     private int publicationYear;
 
     private boolean available;
