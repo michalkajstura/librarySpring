@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -15,8 +15,13 @@ import javax.persistence.Id;
 public class Genre {
 
     @Id
-    private final String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private final Long id;
 
     private final String name;
+
+    @OneToMany
+    private Set<Book> books;
+
 
 }

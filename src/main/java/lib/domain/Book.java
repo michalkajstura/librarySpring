@@ -17,12 +17,17 @@ public class Book {
 
     private String name;
 
+    private boolean available;
+
     @ManyToOne
+    @JoinColumn
     private Author author;
 
     @Column(name="publication_year")
     private int publicationYear;
 
-    private boolean available;
+    @ManyToOne
+    @JoinColumn
+    private Genre genre;
 
 }

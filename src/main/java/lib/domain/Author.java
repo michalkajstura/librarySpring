@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -19,7 +20,7 @@ public class Author {
 
     private int yearOfBirth;
 
-    @ManyToMany(targetEntity = Genre.class)
-    private List<Genre> genres;
+    @OneToMany
+    private Set<Book> books;
 
 }
