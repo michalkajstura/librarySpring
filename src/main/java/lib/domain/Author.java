@@ -1,17 +1,20 @@
 package lib.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
@@ -22,5 +25,10 @@ public class Author {
 
     @OneToMany
     private Set<Book> books;
+
+    @Override
+    public String toString() {
+        return firstName + " " + secondName;
+    }
 
 }

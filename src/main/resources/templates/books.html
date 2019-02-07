@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Publication year</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:if="${books.empty}">
+            <td colspan="4"> No Books Available </td>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td><span th:text="${book.title}">Title</span></td>
+            <td><span th:text="${book.author}">Author</span></td>
+            <td><span th:text="${book.genre}">Genre</span></td>
+            <td><span th:text="${book.publicationYear}">Publication year</span></td>
+        </tr>
+    </tbody>
+
+ </table>
+
+</body>
+</html>

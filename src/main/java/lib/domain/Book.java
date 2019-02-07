@@ -1,23 +1,20 @@
 package lib.domain;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
-    private boolean available;
+    private String title;
 
     @ManyToOne
     @JoinColumn
@@ -26,8 +23,15 @@ public class Book {
     @Column(name="publication_year")
     private int publicationYear;
 
-    @ManyToOne
-    @JoinColumn
-    private Genre genre;
+    private boolean available;
 
+//    private Genre genre;
+    private String genre;
+
+    public Book(String title, Author author, int publicationYear, String genre) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+        this.genre = genre;
+    }
 }
