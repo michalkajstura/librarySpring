@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+</head>
+<body>
+<form th:object="${book}" method="post">
+    <table>
+        <tr>
+            <td><p>Title</p></td>
+            <td><input type="text" th:field="*{title}"></td>
+        </tr>
+        <tr>
+            <td><p>Author</p></td>
+            <td><input type="text" th:field="*{author}"></td>
+        </tr>
+        <tr>
+            <td><p>Publication year</p></td>
+            <td><input type="text" th:field="*{publicationYear}"></td>
+        </tr>
+        <tr>
+            <td><p>Genre</p></td>
+            <td><input type="text" th:field="*{genre}"></td>
+        </tr>
+    </table>
+    <input type="submit" value="Add book"/>
+
+    <span class="validationErrors"
+          th:if="${#fields.hasErrors('title')}"
+          th:errors="*{title}">This field cannot be blank</span>
+
+</form>
+</body>
+</html>
