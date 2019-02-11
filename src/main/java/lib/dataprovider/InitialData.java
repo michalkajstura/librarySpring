@@ -22,17 +22,17 @@ public class InitialData {
     @EventListener(ContextRefreshedEvent.class)
     public void addBooksToDB() {
         log.info("Persisting books");
-        bookRepository.save(
-                new Book("Name of the Rose",
-                        "Umberto Eco",
-                        1980, "Historic"));
-
-        bookRepository.save(new Book("Krew elfów",
-                            "Andrzej Sapkowski",
-                            1994, "Fantasy"));
-
-        bookRepository.save(new Book("Czas pogardy",
-                           "Andrzej Sapkowski",
-                           1995, "Fantasy"));
+//        bookRepository.save(
+//                new Book("Name of the Rose",
+//                        "Umberto Eco",
+//                        1980, "Historic"));
+//
+//        bookRepository.save(new Book("Krew elfów",
+//                            "Andrzej Sapkowski",
+//                            1994, "Fantasy"));
+//
+//        bookRepository.save(new Book("Czas pogardy",
+//                           "Andrzej Sapkowski",
+//                           1995, "Fantasy"));
     }
 }

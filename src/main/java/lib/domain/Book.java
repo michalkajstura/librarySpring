@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Data
 @Entity
@@ -39,6 +40,8 @@ public class Book {
 //    private Genre genre;
     @Size(min = 1, message = "Genre name must be longer")
     private String genre;
+
+    private Date rentedAt;
 
     public Book(String title, String author, int publicationYear, String genre) {
         this.title = title;

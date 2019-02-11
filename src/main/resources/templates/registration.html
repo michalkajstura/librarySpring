@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/bootstrap.css">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Library</title>
+</head>
+<body>
+    <div align="center">
+        <form method="post" th:action="@{/register}" id="registrationForm">
+            <input type="text" name="username" placeholder="Username" /> <br>
+
+            <input type="password" name="password" placeholder="Password"/> <br>
+
+            <input type="password" name="confirmPassword" placeholder="Confirm password"/> <br>
+
+            <input type="email" name="email" placeholder="Email adress"/> <br>
+
+            <input class="btn btn-primary" type="submit" value="Register" />
+        </form>
+        <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}" />
+    </div>
+</body>
+</html>
