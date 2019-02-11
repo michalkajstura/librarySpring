@@ -16,6 +16,9 @@
             <input class="btn-primary" type="submit" value="Login">
         </form>
         <a class="grey-text" th:href="@{/register}">Register here</a>
+        <div th:if="${param.error}" class="alert alert-danger">
+            Invalid username or password
+        </div>
     </div>
 
 </body>

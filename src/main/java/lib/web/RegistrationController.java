@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -29,6 +30,7 @@ public class RegistrationController {
     @GetMapping
     public String registerForm() {
         return "registration";
+//        return (principal == null) ? "registration" : "redirect:/";
     }
 
     @PostMapping
