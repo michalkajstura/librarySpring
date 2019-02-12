@@ -18,6 +18,7 @@
                 <th>Author</th>
                 <th>Genre</th>
                 <th>Publication year</th>
+                <th>Actionyear</th>
             </tr>
         </thead>
         <tbody>
@@ -30,16 +31,24 @@
                 <td><span th:text="${book.author}">Author</span></td>
                 <td><span th:text="${book.genre}">Genre</span></td>
                 <td><span th:text="${book.publicationYear}">Publication year</span></td>
-                <td><a th:href="@{books/rent/(id=${book.id})}">Rent</a></td>
+
+                <td>
+                    <div th:switch="${booksRentedByUser.contains(book)}">
+                        <a th:case="true"
+                               th:href="@{books/return/(id=${book.id})}">Return book</a>
+                        <a th:case="false"
+                           th:href="@{books/rent/(id=${book.id})}">Rent book</a>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
 
     <div th:if="${msg} != null" th:class="${'alert alert-' + css + ' alert-dismissable'}" role="alert">
         <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-            <span aria-hidden="true">x</span>
+            <span aria-hidden="true">&times</span>
         </button>
-        <label th:text="${msg}">message</label>
+        <label th:text="${msg} ">message</label>
     </div>
 
 </body>

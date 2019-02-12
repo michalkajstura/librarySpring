@@ -9,8 +9,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,6 +28,9 @@ public class User implements UserDetails {
     private final String username;
     private final String password;
     private final String email;
+
+    @OneToMany
+    private List<Book> rentedBooks = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -17,7 +17,8 @@
         </form>
         <a class="grey-text" th:href="@{/register}">Register here</a>
         <div th:if="${param.error}" class="alert alert-danger">
-            Invalid username or password
+            <label>Invalid username or password</label>
+        </div>
         </div>
     </div>
 
