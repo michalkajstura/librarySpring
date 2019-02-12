@@ -76,4 +76,10 @@ public class BookRenalServiceImp implements BookRentalService {
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
+
+
+    @Override
+    public List<Book> getBooksContainingPhrase(String phrase) {
+        return bookRepository.findByTitleOrAuthorContaining(phrase);
+    }
 }

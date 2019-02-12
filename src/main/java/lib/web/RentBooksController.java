@@ -29,10 +29,7 @@ public class RentBooksController {
 
     @GetMapping
     public String showAllBooks(Model model, Principal principal) {
-        String username = principal.getName();
-        List<Book> booksRentedByCurrentUser =
-               bookRentalService.getBooksRentedByUser(username);
-        model.addAttribute("booksRentedByUser", booksRentedByCurrentUser);
+        addBookRentedByUser(model, principal.getName());
 
         model.addAttribute("books", bookRentalService.getAllBooks());
 
@@ -81,6 +78,25 @@ public class RentBooksController {
         redirectAttributes.addFlashAttribute("msg", message);
         redirectAttributes.addFlashAttribute("css", cssColor);
         return "redirect:/books";
+    }
+
+    @PostMapping("/search")
+    public String showSearchedBooks(Model model,
+                                    Principal principal,
+                                    @RequestParam("searchPhrase") String searchPhrase) {
+
+        addBookRentedByUser(model, principal.getName());
+
+        model.addAttribute("books",
+                bookRentalService.getBooksContainingPhrase(searchPhrase));
+
+        return "books";
+    }
+
+    private void addBookRentedByUser(Model model, String username) {
+        List<Book> booksRentedByCurrentUser =
+                bookRentalService.getBooksRentedByUser(username);
+        model.addAttribute("booksRentedByUser", booksRentedByCurrentUser);
     }
 
 }

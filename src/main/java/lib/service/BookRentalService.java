@@ -19,4 +19,5 @@ public interface BookRentalService {
 
     List<Book> getAllBooks();
 
+    List<Book> getBooksContainingPhrase(String phrase);
 }
