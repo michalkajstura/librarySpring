@@ -1,4 +1,4 @@
-package lib.security;
+package lib.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
             .and()
                 .logout()
+                .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
             .and()
                 .csrf()
@@ -58,4 +59,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
