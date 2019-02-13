@@ -2,8 +2,8 @@ package lib.web;
 
 import lib.data.*;
 
-import lib.domain.Book;
-import lib.service.BookRentalService;
+import lib.booksRental.Book;
+import lib.booksRental.BookRentalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -74,13 +74,12 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
+        <!-- https://mvnrepository.com/artifact/javax.money/money-api -->
         <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-            <version>3.0.4.RELEASE</version>
+            <groupId>javax.money</groupId>
+            <artifactId>money-api</artifactId>
+            <version>1.0.3</version>
         </dependency>
-
     </dependencies>
 
     <build>

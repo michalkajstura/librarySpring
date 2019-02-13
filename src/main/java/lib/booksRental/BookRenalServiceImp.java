@@ -1,10 +1,9 @@
-package lib.service;
+package lib.booksRental;
 
 import lib.data.BookNotFoundException;
 import lib.data.BookRepository;
 import lib.data.UserRepository;
-import lib.domain.Book;
-import lib.domain.User;
+import lib.account.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 

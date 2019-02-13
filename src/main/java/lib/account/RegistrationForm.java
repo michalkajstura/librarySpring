@@ -1,6 +1,6 @@
-package lib.security;
+package lib.account;
 
-import lib.domain.User;
+import lib.account.User;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

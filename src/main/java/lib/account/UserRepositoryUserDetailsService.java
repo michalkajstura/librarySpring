@@ -1,4 +1,4 @@
-package lib.security;
+package lib.account;
 
 import lib.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

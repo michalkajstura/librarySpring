@@ -1,5 +1,6 @@
-package lib.domain;
+package lib.account;
 
+import lib.booksRental.Book;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,11 +9,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
+import javax.money.MonetaryAmount;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
@@ -20,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor(access= AccessLevel.PRIVATE, force=true)
 @RequiredArgsConstructor
 public class User implements UserDetails {
+    private final static CurrencyUnit CURRENCY = Monetary.getCurrency("PLN");
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +30,11 @@ public class User implements UserDetails {
     private final String username;
     private final String password;
     private final String email;
+    private MonetaryAmount penalty =
+            Monetary.getDefaultAmountFactory()
+            .setCurrency(CURRENCY)
+            .setNumber(0)
+            .create();
 
     @OneToMany
     private List<Book> rentedBooks = new ArrayList<>();

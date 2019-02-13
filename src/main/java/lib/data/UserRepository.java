@@ -1,6 +1,6 @@
 package lib.data;
 
-import lib.domain.User;
+import lib.account.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
