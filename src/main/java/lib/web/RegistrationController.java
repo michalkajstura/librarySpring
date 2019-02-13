@@ -1,6 +1,6 @@
 package lib.web;
 
-import lib.data.UserRepository;
+import lib.account.UserRepository;
 import lib.account.User;
 import lib.account.RegistrationForm;
 import org.springframework.beans.factory.annotation.Autowired;

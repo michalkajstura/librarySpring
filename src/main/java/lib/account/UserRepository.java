@@ -1,4 +1,4 @@
-package lib.data;
+package lib.account;
 
 import lib.account.User;
 import org.springframework.data.jpa.repository.JpaRepository;

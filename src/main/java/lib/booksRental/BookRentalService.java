@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface BookRentalService {
 
-    void rentBook(Long bookId, String username) throws BookNotFoundException, UsernameNotFoundException;
+    void rentBook(Long bookId, String username);
 
-    void returnBook(Long bookId, String username) throws BookNotFoundException, UsernameNotFoundException;
+    void returnBook(Long bookId, String username);
 
     List<Book> getBooksRentedByUser(String username);
 

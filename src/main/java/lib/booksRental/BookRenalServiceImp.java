@@ -1,8 +1,6 @@
 package lib.booksRental;
 
-import lib.data.BookNotFoundException;
-import lib.data.BookRepository;
-import lib.data.UserRepository;
+import lib.account.UserRepository;
 import lib.account.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -23,11 +21,10 @@ public class BookRenalServiceImp implements BookRentalService {
         this.userRepository = userRepository;
     }
 
-    public void rentBook(Long bookId, String username)
-            throws BookNotFoundException, UsernameNotFoundException {
+    public void rentBook(Long bookId, String username) {
         Book book = bookRepository
                 .findById(bookId)
-                .orElseThrow(() -> new BookNotFoundException(bookId + "Not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Book: " + bookId + " not found"));
 
         book.setAvailable(false);
         book.setRentedAt(new Date());
@@ -35,18 +32,17 @@ public class BookRenalServiceImp implements BookRentalService {
 
         User user = userRepository
             .findByUsername(username)
-            .orElseThrow(() -> new UsernameNotFoundException(username));
+            .orElseThrow(() -> new IllegalArgumentException("User: " + username + " not found"));
 
         user.getRentedBooks()
                 .add(book);
         userRepository.save(user);
     }
 
-    public void returnBook(Long bookId, String username)
-            throws BookNotFoundException, UsernameNotFoundException {
+    public void returnBook(Long bookId, String username) {
         Book book = bookRepository
             .findById(bookId)
-            .orElseThrow(() -> new BookNotFoundException(bookId + "Not found"));
+            .orElseThrow(() -> new IllegalArgumentException("Book: " + bookId + " not found"));
 
         book.setAvailable(true);
         book.setRentedAt(null);
@@ -54,7 +50,7 @@ public class BookRenalServiceImp implements BookRentalService {
 
         User user = userRepository
             .findByUsername(username)
-            .orElseThrow(() -> new UsernameNotFoundException("Username: " + username + " not found"));
+            .orElseThrow(() -> new IllegalArgumentException("User: " + username + " not found"));
 
         user.getRentedBooks()
                 .remove(book);

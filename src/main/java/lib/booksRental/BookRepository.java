@@ -1,4 +1,4 @@
-package lib.data;
+package lib.booksRental;
 
 import lib.booksRental.Book;
 import org.springframework.data.jpa.repository.JpaRepository;

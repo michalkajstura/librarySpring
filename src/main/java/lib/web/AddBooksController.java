@@ -1,6 +1,6 @@
 package lib.web;
 
-import lib.data.BookRepository;
+import lib.booksRental.BookRepository;
 import lib.booksRental.Book;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
