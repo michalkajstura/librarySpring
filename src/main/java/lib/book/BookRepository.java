@@ -1,6 +1,5 @@
-package lib.booksRental;
+package lib.book;
 
-import lib.booksRental.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

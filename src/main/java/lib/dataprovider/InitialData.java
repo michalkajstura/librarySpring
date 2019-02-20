@@ -1,6 +1,6 @@
 package lib.dataprovider;
 
-import lib.booksRental.BookRepository;
+import lib.book.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;

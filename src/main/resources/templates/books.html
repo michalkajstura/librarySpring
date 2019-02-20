@@ -36,9 +36,9 @@
                 <td>
                     <div th:switch="${booksRentedByUser.contains(book)}">
                         <a th:case="true"
-                               th:href="@{books/return/(id=${book.id})}">Return book</a>
+                               th:href="@{books/process/return/(id=${book.id})}">Return book</a>
                         <a th:case="false"
-                           th:href="@{books/rent/(id=${book.id})}">Rent book</a>
+                           th:href="@{books/process/rent/(id=${book.id})}">Rent book</a>
                     </div>
                 </td>
             </tr>

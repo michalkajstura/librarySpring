@@ -1,4 +1,4 @@
-package lib.booksRental;
+package lib.book;
 
 import lib.account.UserRepository;
 import lib.account.User;
@@ -11,28 +11,41 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BookRenalServiceImp implements BookRentalService {
+public class BookRentalService {
 
     private BookRepository bookRepository;
     private UserRepository userRepository;
 
-    public BookRenalServiceImp(BookRepository bookRepository, UserRepository userRepository) {
+    public BookRentalService(BookRepository bookRepository, UserRepository userRepository) {
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
     }
 
-    public void rentBook(Long bookId, String username) {
-        Book book = bookRepository
+    public boolean tryRentBook(Long bookId, String username) {
+         Book book = bookRepository
                 .findById(bookId)
                 .orElseThrow(() -> new IllegalArgumentException("Book: " + bookId + " not found"));
-
-        book.setAvailable(false);
-        book.setRentedAt(new Date());
-        bookRepository.save(book);
 
         User user = userRepository
             .findByUsername(username)
             .orElseThrow(() -> new IllegalArgumentException("User: " + username + " not found"));
+
+        if (!book.isAvailable()) {
+            return false;
+        }
+
+        if(user.getPenalty() > 0) {
+            return false;
+        }
+
+        rentBook(book, user);
+        return true;
+    }
+
+    private void rentBook(Book book, User user) {
+        book.setAvailable(false);
+        book.setRentedAt(new Date());
+        bookRepository.save(book);
 
         user.getRentedBooks()
                 .add(book);
@@ -57,7 +70,6 @@ public class BookRenalServiceImp implements BookRentalService {
         userRepository.save(user);
     }
 
-    @Override
     public List<Book> getBooksRentedByUser(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
 
@@ -67,13 +79,11 @@ public class BookRenalServiceImp implements BookRentalService {
             return Collections.emptyList();
     }
 
-    @Override
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
 
-    @Override
     public List<Book> getBooksContainingPhrase(String phrase) {
         return bookRepository.findByTitleOrAuthorContaining(phrase);
     }
