@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
@@ -12,44 +12,50 @@
 </head>
 <body>
     <div th:insert="~{navbar :: navbar}"></div>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Genre</th>
-                <th>Publication year</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:if="${books.isEmpty()}">
-                <td colspan="4"> No Books Available </td>
-            </tr>
 
-            <tr th:each="book : ${books}">
-                <td><span th:text="${book.title}">Title</span></td>
-                <td><span th:text="${book.author}">Author</span></td>
-                <td><span th:text="${book.genre}">Genre</span></td>
-                <td><span th:text="${book.publicationYear}">Publication year</span></td>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4" th:include="~{sidebar :: sidebar}"></div>
+            <div class="col-lg-8">
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Genre</th>
+                            <th>Publication year</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${books_list.isEmpty()}">
+                            <td colspan="4"> No Books Available </td>
+                        </tr>
 
-                <td>
-                    <div th:switch="${booksRentedByUser.contains(book)}">
-                        <a th:case="true"
-                               th:href="@{books/process/return/(id=${book.id})}">Return book</a>
-                        <a th:case="false"
-                           th:href="@{books/process/rent/(id=${book.id})}">Rent book</a>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                        <tr th:each="book : ${books_list}">
+                            <td><span th:text="${book.title}">Title</span></td>
+                            <td><span th:text="${book.author}">Author</span></td>
+                            <td><span th:text="${book.genre}">Genre</span></td>
+                            <td><span th:text="${book.publicationYear}">Publication year</span></td>
+                            <td>
+                                <a th:if="${!returning_book}" th:href="@{/books/process/rent/(id=${book.id})}" class="btn btn-primary "
+                                    th:classappend="${book.isAvailable()} ? 'active' : 'disabled'">Rent</a>
+                                <a th:if="${returning_book}"
+                                   th:href="@{/books/process/return/(id=${book.id})}" class="btn btn-primary">Return</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-    <div th:if="${msg} != null" th:class="${'alert alert-' + css + ' alert-dismissable'}" role="alert">
-        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-            <span aria-hidden="true">&times</span>
-        </button>
-        <label th:text="${msg} ">message</label>
+                <div th:if="${msg} != null" th:class="${'alert alert-' + css + ' alert-dismissable'}" role="alert">
+                    <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                    <label th:text="${msg} ">message</label>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </body>

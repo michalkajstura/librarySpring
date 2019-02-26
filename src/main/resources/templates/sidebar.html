@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
+</head>
+<body>
+    <div th:fragment="sidebar">
+        <div class="sidenav">
+            <a th:href="@{/books/all}">Books</a>
+            <a th:href="@{/books/rented}">Rented books</a>
+            <a th:href="@{/books/history}">Rental history</a>
+        </div>
+    </div>
+</body>
+</html>

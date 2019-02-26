@@ -16,6 +16,9 @@ import java.util.List;
 @RequestMapping("/books")
 public class ShowBooksController {
 
+    private final static String BOOKS_TO_SHOW = "books_list";
+    private final static String RETURNING_BOOK = "returning_book";
+
     private BookRentalService bookRentalService;
 
     @Autowired
@@ -23,31 +26,32 @@ public class ShowBooksController {
         this.bookRentalService = bookRentalService;
     }
 
-    @GetMapping
-    public String showAllBooks(Model model, Principal principal) {
-        addBookRentedByUser(model, principal.getName());
-
-        model.addAttribute("books", bookRentalService.getAllBooks());
+    @GetMapping("/all")
+    public String showAllBooks(Model model) {
+        model.addAttribute(RETURNING_BOOK, false);
+        model.addAttribute(BOOKS_TO_SHOW, bookRentalService.getAllBooks());
         return "books";
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     public String showSearchedBooks(Model model,
-                                    Principal principal,
-                                    @RequestParam("searchPhrase") String searchPhrase) {
-
-        addBookRentedByUser(model, principal.getName());
-
-        model.addAttribute("books",
+                                    @RequestParam("search_phrase") String searchPhrase) {
+        model.addAttribute(RETURNING_BOOK, false);
+        model.addAttribute(BOOKS_TO_SHOW,
                 bookRentalService.getBooksContainingPhrase(searchPhrase));
 
         return "books";
     }
 
-    private void addBookRentedByUser(Model model, String username) {
+    @GetMapping("/rented")
+    public String showRentedBooks(Model model,
+                                  Principal principal) {
         List<Book> booksRentedByCurrentUser =
-                bookRentalService.getBooksRentedByUser(username);
-        model.addAttribute("booksRentedByUser", booksRentedByCurrentUser);
+                bookRentalService.getBooksRentedByUser(principal.getName());
+        model.addAttribute(RETURNING_BOOK, true);
+        model.addAttribute(BOOKS_TO_SHOW, booksRentedByCurrentUser);
+
+        return "books";
     }
 
 }

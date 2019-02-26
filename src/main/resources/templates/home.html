@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>Library</title>
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}">
 </head>
 <body>
-    <div th:insert="~{navbar :: navbar}"></div>
+
+    <div th:include="~{navbar :: navbar}"></div>
+
+    <!--<div class="container">-->
+        <!--<div class="row" th:include="~{navbar :: navbar}"></div>-->
+        <!--<div class="row">-->
+            <!--<div class="col-sm-6" th:include="~{sidebar :: sidebar}"></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div th:include="~{sidebar :: sidebar}"></div>-->
 </body>
 </html>

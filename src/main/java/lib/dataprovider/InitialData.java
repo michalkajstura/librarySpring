@@ -1,5 +1,6 @@
 package lib.dataprovider;
 
+import lib.book.Book;
 import lib.book.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +23,23 @@ public class InitialData {
     public void addBooksToDB() {
         log.info("Persisting books");
 //        bookRepository.save(
-//                new Book("Name of the Rose",
+//                new Book(0L, "Name of the Rose",
 //                        "Umberto Eco",
-//                        1980, "Historic"));
+//                        1980,
+//                        true,
+//                        "Historic",null));
 //
-//        bookRepository.save(new Book("Krew elfów",
-//                            "Andrzej Sapkowski",
-//                            1994, "Fantasy"));
+//         bookRepository.save(
+//                new Book(0L, "Krew elfów",
+//                        "Andrzej Sapkowski",
+//                        1994,
+//                        true,
+//                        "Fantasy",null));
 //
-//        bookRepository.save(new Book("Czas pogardy",
+//
+//        bookRepository.save(new Book(0L, "Czas pogardy",
 //                           "Andrzej Sapkowski",
-//                           1995, "Fantasy"));
+//                           1995,
+//                true, "Fantasy", null));
     }
 }
