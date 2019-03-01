@@ -12,12 +12,17 @@
 </head>
 <body>
     <div th:insert="~{navbar :: navbar}"></div>
-
+    <div class="row search">
+        <form class="form-inline" th:action="@{/books/search/}">
+            <input class="form-control mr-sm-2" type="text" name="search_phrase" placeholder="Search">
+            <button class="btn btn-light" type="submit">Search</button>
+        </form>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-4" th:include="~{sidebar :: sidebar}"></div>
             <div class="col-lg-8">
-                 <table>
+                 <table class="table">
                     <thead>
                         <tr>
                             <th>Title</th>
@@ -38,10 +43,10 @@
                             <td><span th:text="${book.genre}">Genre</span></td>
                             <td><span th:text="${book.publicationYear}">Publication year</span></td>
                             <td>
-                                <a th:if="${!returning_book}" th:href="@{/books/process/rent/(id=${book.id})}" class="btn btn-primary "
+                                <a th:if="${!returning_book}" th:href="@{/books/process/rent/(id=${book.bookId})}" class="btn btn-primary "
                                     th:classappend="${book.isAvailable()} ? 'active' : 'disabled'">Rent</a>
                                 <a th:if="${returning_book}"
-                                   th:href="@{/books/process/return/(id=${book.id})}" class="btn btn-primary">Return</a>
+                                   th:href="@{/books/process/return/(id=${book.bookId})}" class="btn btn-primary">Return</a>
                             </td>
                         </tr>
                     </tbody>

@@ -1,9 +1,8 @@
 package lib.penalty;
 
 import lib.account.User;
-import lib.account.UserRepository;
-import lib.book.Book;
-import org.springframework.beans.factory.annotation.Autowired;
+import lib.book.BookOrder;
+import lib.book.BookOrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -11,30 +10,34 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PenaltyService {
-    public final static long MAX_RENTAL_DAYS = 34;
-    public final static long PENALTY_PER_DAY = 50;
+    private final static long MAX_RENTAL_DAYS = 34;
+    private final static long PENALTY_PER_DAY = 50;
 
-    public void updatePenalties(List<User> users) {
+    private BookOrderRepository orderRepository;
+
+    public PenaltyService(BookOrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
+    void updatePenalties(List<User> users) {
         users.forEach(this::increasePenaltiesIfExceeded);
     }
 
-    private long penaltyForBook(Book book) {
-        Optional<Date> date = book.getRentedAt();
-        if (!date.isPresent())
-            return 0;
+    private long penaltyForBook(BookOrder order) {
+        Date orderDate = order.getOrderDate();
 
-        long days = daysFromRental(date.get());
+        long days = daysFromRental(orderDate);
         return (days > MAX_RENTAL_DAYS)
                 ? (days - MAX_RENTAL_DAYS) * PENALTY_PER_DAY
                 : 0;
     }
 
     private void increasePenaltiesIfExceeded(User user) {
-        long penaltyToPay = user.getRentedBooks()
+        List<BookOrder> orders = orderRepository.findAllByUser(user);
+        long penaltyToPay = orders
                 .stream()
                 .map(this::penaltyForBook)
                 .reduce(0L, Long::sum);

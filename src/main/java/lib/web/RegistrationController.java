@@ -29,7 +29,6 @@ public class RegistrationController {
     @GetMapping
     public String registerForm() {
         return "registration";
-//        return (principal == null) ? "registration" : "redirect:/";
     }
 
     @PostMapping
