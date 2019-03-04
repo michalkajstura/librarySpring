@@ -14,13 +14,6 @@ import javax.validation.Valid;
 @RequestMapping(value = "/addBooks")
 public class AddBooksController {
 
-    private final BookRepository bookRepository;
-
-    public AddBooksController(BookRepository bookRepository
-                              ) {
-        this.bookRepository = bookRepository;
-    }
-
     @ModelAttribute
     public Book book() {
         return new Book();
@@ -36,7 +29,7 @@ public class AddBooksController {
         if (errors.hasErrors())
             return "addBooks";
 
-        bookRepository.save(newBook);
+//        bookRepository.save(newBook);
 
         return "redirect:/addBooks";
     }

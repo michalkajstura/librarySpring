@@ -1,7 +1,7 @@
 package lib.web;
 
 import lib.book.Book;
-import lib.book.BookRentalService;
+import lib.process_books.BookRentalService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +35,7 @@ public class ShowBooksController {
     public String showSearchedBooks(Model model,
                                     @RequestParam("search_phrase") String searchPhrase) {
         model.addAttribute(RETURNING_BOOK, false);
+        List<Book> bks = bookRentalService.getBooksContainingPhrase(searchPhrase);
         model.addAttribute(BOOKS_TO_SHOW,
                 bookRentalService.getBooksContainingPhrase(searchPhrase));
 

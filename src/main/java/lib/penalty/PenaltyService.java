@@ -1,8 +1,8 @@
 package lib.penalty;
 
 import lib.account.User;
-import lib.book.BookOrder;
-import lib.book.BookOrderRepository;
+import lib.process_books.BookOrder;
+import lib.process_books.BookOrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

@@ -12,12 +12,6 @@
 </head>
 <body>
     <div th:insert="~{navbar :: navbar}"></div>
-    <div class="row search">
-        <form class="form-inline" th:action="@{/books/search/}">
-            <input class="form-control mr-sm-2" type="text" name="search_phrase" placeholder="Search">
-            <button class="btn btn-light" type="submit">Search</button>
-        </form>
-    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-4" th:include="~{sidebar :: sidebar}"></div>
@@ -39,8 +33,8 @@
 
                         <tr th:each="book : ${books_list}">
                             <td><span th:text="${book.title}">Title</span></td>
-                            <td><span th:text="${book.author}">Author</span></td>
-                            <td><span th:text="${book.genre}">Genre</span></td>
+                            <td><span th:text="${book.authors}">Author</span></td>
+                            <td><span th:text="${book.genres}">Genre</span></td>
                             <td><span th:text="${book.publicationYear}">Publication year</span></td>
                             <td>
                                 <a th:if="${!returning_book}" th:href="@{/books/process/rent/(id=${book.bookId})}" class="btn btn-primary "

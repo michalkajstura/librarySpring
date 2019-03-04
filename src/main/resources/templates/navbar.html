@@ -11,6 +11,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/books/all}">Rent books</a>
                     </li>
@@ -22,13 +23,14 @@
                         </form>
                     </li>
                 </ul>
+
                 <ul class="navbar-nav ml-auto">
                     <li th:if="${#request.isUserInRole('USER')}">
                         <a th:href="@{/account}" class='nav-link' th:text="${#request.userPrincipal.getName()}"></a>
                     </li>
                      <li th:if="${#request.isUserInRole('USER')}">
                          <form th:action="@{/logout}" method="POST">
-                             <input class="nav-link" type="submit" value ="Logout" />
+                             <button class="btn btn-light" type="submit">Logout</button>
                          </form>
                     </li>
                     <li th:if="${!#request.isUserInRole('USER')}">

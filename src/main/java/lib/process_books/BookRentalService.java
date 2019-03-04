@@ -1,15 +1,17 @@
-package lib.book;
+package lib.process_books;
 
 import lib.account.UserRepository;
 import lib.account.User;
+import lib.book.Author;
+import lib.book.AuthorRepository;
+import lib.book.Book;
+import lib.book.BookRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class BookRentalService {
@@ -17,11 +19,16 @@ public class BookRentalService {
     private BookRepository bookRepository;
     private UserRepository userRepository;
     private BookOrderRepository orderRepository;
+    private AuthorRepository authorRepository;
 
-    public BookRentalService(BookRepository bookRepository, UserRepository userRepository, BookOrderRepository orderRepository) {
+    public BookRentalService(BookRepository bookRepository,
+                             UserRepository userRepository,
+                             BookOrderRepository orderRepository,
+                             AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
+        this.authorRepository = authorRepository;
     }
 
     public boolean tryRentBook(Long bookId, String username) {
@@ -84,6 +91,12 @@ public class BookRentalService {
     }
 
     public List<Book> getBooksContainingPhrase(String phrase) {
-        return bookRepository.findByTitleOrAuthorContaining(phrase);
+        List<Book> similarTitles = bookRepository.findByTitleContaining(phrase);
+        List<Book> similarAuthors = bookRepository.findAllByAuthorName(phrase);
+        return Stream.concat(
+                similarTitles.stream(),
+                similarAuthors.stream()
+        ).distinct()
+                .collect(Collectors.toList());
     }
 }
