@@ -35,7 +35,6 @@ public class ShowBooksController {
     public String showSearchedBooks(Model model,
                                     @RequestParam("search_phrase") String searchPhrase) {
         model.addAttribute(RETURNING_BOOK, false);
-        List<Book> bks = bookRentalService.getBooksContainingPhrase(searchPhrase);
         model.addAttribute(BOOKS_TO_SHOW,
                 bookRentalService.getBooksContainingPhrase(searchPhrase));
 

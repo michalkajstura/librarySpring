@@ -2,8 +2,6 @@ package lib.process_books;
 
 import lib.account.UserRepository;
 import lib.account.User;
-import lib.book.Author;
-import lib.book.AuthorRepository;
 import lib.book.Book;
 import lib.book.BookRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,16 +17,13 @@ public class BookRentalService {
     private BookRepository bookRepository;
     private UserRepository userRepository;
     private BookOrderRepository orderRepository;
-    private AuthorRepository authorRepository;
 
     public BookRentalService(BookRepository bookRepository,
                              UserRepository userRepository,
-                             BookOrderRepository orderRepository,
-                             AuthorRepository authorRepository) {
+                             BookOrderRepository orderRepository) {
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
-        this.authorRepository = authorRepository;
     }
 
     public boolean tryRentBook(Long bookId, String username) {
@@ -55,13 +50,8 @@ public class BookRentalService {
         orderRepository.save(order);
     }
 
-    public void tryReturnBook(Long bookId, String username) {
+    public void returnBook(Long bookId) {
         Book book = getBook(bookId);
-        User user = getUser(username);
-        returnBook(book, user);
-    }
-
-    private void returnBook(Book book, User user) {
         book.setAvailable(true);
         BookOrder order = orderRepository.findByRentedBook(book);
         orderRepository.delete(order);

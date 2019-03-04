@@ -46,12 +46,11 @@ public class ProcessBooksController {
 
     @GetMapping(value = "/return")
     public String returnBook(@RequestParam(name = "id") Long id,
-                             Principal principal,
                              final RedirectAttributes redirectAttributes) {
         log.info("returning book: {}", id);
 
         try {
-            bookRentalService.tryReturnBook(id, principal.getName());
+            bookRentalService.returnBook(id);
         } catch (IllegalArgumentException ex) {
             redirectAttributes.addFlashAttribute("msg", ex.getMessage());
             redirectAttributes.addFlashAttribute("css", "danger");
